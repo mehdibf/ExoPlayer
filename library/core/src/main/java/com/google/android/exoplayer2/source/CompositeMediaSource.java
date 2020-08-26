@@ -93,7 +93,7 @@ public abstract class CompositeMediaSource<T> extends BaseMediaSource {
    * @param timeline The timeline of the child source.
    */
   protected abstract void onChildSourceInfoRefreshed(
-      @UnknownNull T id, MediaSource mediaSource, Timeline timeline);
+                                                     @UnknownNull T id, MediaSource mediaSource, Timeline timeline, @Nullable Object manifest);
 
   /**
    * Prepares a child source.
@@ -110,7 +110,7 @@ public abstract class CompositeMediaSource<T> extends BaseMediaSource {
   protected final void prepareChildSource(@UnknownNull T id, MediaSource mediaSource) {
     Assertions.checkArgument(!childSources.containsKey(id));
     MediaSourceCaller caller =
-        (source, timeline) -> onChildSourceInfoRefreshed(id, source, timeline);
+        (source, timeline, manifest) -> onChildSourceInfoRefreshed(id, source, timeline, manifest);
     ForwardingEventListener eventListener = new ForwardingEventListener(id);
     childSources.put(id, new MediaSourceAndListener(mediaSource, caller, eventListener));
     mediaSource.addEventListener(Assertions.checkNotNull(eventHandler), eventListener);

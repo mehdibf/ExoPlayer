@@ -269,7 +269,7 @@ public final class AdsMediaSource extends CompositeMediaSource<MediaPeriodId> {
 
   @Override
   protected void onChildSourceInfoRefreshed(
-      MediaPeriodId mediaPeriodId, MediaSource mediaSource, Timeline timeline) {
+      MediaPeriodId mediaPeriodId, MediaSource mediaSource, Timeline timeline, @Nullable Object manifest) {
     if (mediaPeriodId.isAd()) {
       int adGroupIndex = mediaPeriodId.adGroupIndex;
       int adIndexInAdGroup = mediaPeriodId.adIndexInAdGroup;
@@ -309,7 +309,7 @@ public final class AdsMediaSource extends CompositeMediaSource<MediaPeriodId> {
           adPlaybackState.adGroupCount == 0
               ? contentTimeline
               : new SinglePeriodAdTimeline(contentTimeline, adPlaybackState);
-      refreshSourceInfo(timeline);
+      refreshSourceInfo(timeline, null);
     }
   }
 

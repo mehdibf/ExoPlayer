@@ -116,4 +116,6 @@ public interface LoadControl {
    * @return Whether playback should be allowed to start or resume.
    */
   boolean shouldStartPlayback(long bufferedDurationUs, float playbackSpeed, boolean rebuffering);
+
+  boolean updateBufferDurationsMs(int target, int max, int min);
 }

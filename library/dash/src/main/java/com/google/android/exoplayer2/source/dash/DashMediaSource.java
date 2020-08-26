@@ -455,8 +455,8 @@ public final class DashMediaSource extends BaseMediaSource {
   private final CompositeSequenceableLoaderFactory compositeSequenceableLoaderFactory;
   private final DrmSessionManager drmSessionManager;
   private final LoadErrorHandlingPolicy loadErrorHandlingPolicy;
-  private final long livePresentationDelayMs;
-  private final boolean livePresentationDelayOverridesManifest;
+  private long livePresentationDelayMs;
+  private boolean livePresentationDelayOverridesManifest;
   private final EventDispatcher manifestEventDispatcher;
   private final ParsingLoadable.Parser<? extends DashManifest> manifestParser;
   private final ManifestCallback manifestCallback;
@@ -1016,6 +1016,13 @@ public final class DashMediaSource extends BaseMediaSource {
   }
 
   private void processManifest(boolean scheduleRefresh) {
+  if(this.manifest.serviceDescription != null) {
+    int maxLatence = this.manifest.serviceDescription.getLatency().getMax();
+    if (maxLatence > 0) {
+      this.livePresentationDelayMs = maxLatence;
+      this.livePresentationDelayOverridesManifest = true;
+    }
+  }
     // Update any periods.
     for (int i = 0; i < periodsById.size(); i++) {
       int id = periodsById.keyAt(i);
@@ -1099,7 +1106,7 @@ public final class DashMediaSource extends BaseMediaSource {
             windowDefaultStartPositionUs,
             manifest,
             mediaItem);
-    refreshSourceInfo(timeline);
+    refreshSourceInfo(timeline, manifest);
 
     if (!sideloadedManifest) {
       // Remove any pending simulated refresh.

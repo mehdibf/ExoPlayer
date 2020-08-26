@@ -166,7 +166,7 @@ public final class MetadataRetriever {
         }
 
         @Override
-        public void onSourceInfoRefreshed(MediaSource source, Timeline timeline) {
+        public void onSourceInfoRefreshed(MediaSource source, Timeline timeline, Object manifest) {
           if (mediaPeriodCreated) {
             // Ignore dynamic updates.
             return;

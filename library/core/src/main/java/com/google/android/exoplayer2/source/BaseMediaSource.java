@@ -41,6 +41,8 @@ public abstract class BaseMediaSource implements MediaSource {
 
   @Nullable private Looper looper;
   @Nullable private Timeline timeline;
+  @Nullable private Object manifest;
+
 
   public BaseMediaSource() {
     mediaSourceCallers = new ArrayList<>(/* initialCapacity= */ 1);
@@ -78,10 +80,11 @@ public abstract class BaseMediaSource implements MediaSource {
    *
    * @param timeline The new {@link Timeline}.
    */
-  protected final void refreshSourceInfo(Timeline timeline) {
+  protected final void refreshSourceInfo(Timeline timeline, @Nullable Object manifest) {
     this.timeline = timeline;
+    this.manifest = manifest;
     for (MediaSourceCaller caller : mediaSourceCallers) {
-      caller.onSourceInfoRefreshed(/* source= */ this, timeline);
+      caller.onSourceInfoRefreshed(/* source= */ this, timeline, manifest);
     }
   }
 
@@ -197,7 +200,7 @@ public abstract class BaseMediaSource implements MediaSource {
       prepareSourceInternal(mediaTransferListener);
     } else if (timeline != null) {
       enable(caller);
-      caller.onSourceInfoRefreshed(/* source= */ this, timeline);
+      caller.onSourceInfoRefreshed(/* source= */ this, timeline, null);
     }
   }
 

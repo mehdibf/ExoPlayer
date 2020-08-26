@@ -191,7 +191,7 @@ public final class MergingMediaSource extends CompositeMediaSource<Integer> {
 
   @Override
   protected void onChildSourceInfoRefreshed(
-      Integer id, MediaSource mediaSource, Timeline timeline) {
+      Integer id, MediaSource mediaSource, Timeline timeline, @Nullable Object manifest) {
     if (mergeError != null) {
       return;
     }
@@ -210,7 +210,7 @@ public final class MergingMediaSource extends CompositeMediaSource<Integer> {
       if (adjustPeriodTimeOffsets) {
         computePeriodTimeOffsets();
       }
-      refreshSourceInfo(timelines[0]);
+      refreshSourceInfo(timelines[0], manifest);
     }
   }
 

@@ -349,7 +349,7 @@ public class FakeMediaSource extends BaseMediaSource {
   }
 
   private void finishSourcePreparation(boolean sendManifestLoadEvents) {
-    refreshSourceInfo(Assertions.checkStateNotNull(timeline));
+      refreshSourceInfo(Assertions.checkStateNotNull(timeline), null);
     if (!timeline.isEmpty() && sendManifestLoadEvents) {
       MediaLoadData mediaLoadData =
           new MediaLoadData(

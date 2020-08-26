@@ -433,7 +433,7 @@ import java.util.Set;
   private void prepareChildSource(MediaSourceHolder holder) {
     MediaSource mediaSource = holder.mediaSource;
     MediaSource.MediaSourceCaller caller =
-        (source, timeline) -> mediaSourceListInfoListener.onPlaylistUpdateRequested();
+        (source, timeline, manifest) -> mediaSourceListInfoListener.onPlaylistUpdateRequested();
     ForwardingEventListener eventListener = new ForwardingEventListener(holder);
     childSources.put(holder, new MediaSourceAndListener(mediaSource, caller, eventListener));
     mediaSource.addEventListener(Util.createHandlerForCurrentOrMainLooper(), eventListener);

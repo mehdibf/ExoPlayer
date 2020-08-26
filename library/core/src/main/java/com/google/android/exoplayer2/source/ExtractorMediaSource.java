@@ -375,8 +375,8 @@ public final class ExtractorMediaSource extends CompositeMediaSource<Void> {
 
   @Override
   protected void onChildSourceInfoRefreshed(
-      @Nullable Void id, MediaSource mediaSource, Timeline timeline) {
-    refreshSourceInfo(timeline);
+      @Nullable Void id, MediaSource mediaSource, Timeline timeline, @Nullable Object manifest) {
+    refreshSourceInfo(timeline, manifest);
   }
 
   @Override

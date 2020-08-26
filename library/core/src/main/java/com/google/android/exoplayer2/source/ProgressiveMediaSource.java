@@ -353,6 +353,6 @@ public final class ProgressiveMediaSource extends BaseMediaSource
             }
           };
     }
-    refreshSourceInfo(timeline);
+    refreshSourceInfo(timeline, null);
   }
 }

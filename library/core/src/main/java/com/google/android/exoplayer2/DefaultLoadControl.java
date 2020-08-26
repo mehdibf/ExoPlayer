@@ -247,10 +247,10 @@ public class DefaultLoadControl implements LoadControl {
 
   private final DefaultAllocator allocator;
 
-  private final long minBufferUs;
-  private final long maxBufferUs;
-  private final long bufferForPlaybackUs;
-  private final long bufferForPlaybackAfterRebufferUs;
+  private long minBufferUs;
+  private long maxBufferUs;
+  private long bufferForPlaybackUs;
+  private long bufferForPlaybackAfterRebufferUs;
   private final int targetBufferBytesOverwrite;
   private final boolean prioritizeTimeOverSizeThresholds;
   private final long backBufferDurationUs;
@@ -416,6 +416,22 @@ public class DefaultLoadControl implements LoadControl {
         || (!prioritizeTimeOverSizeThresholds
             && allocator.getTotalBytesAllocated() >= targetBufferBytes);
   }
+
+  @Override
+  public boolean updateBufferDurationsMs(int target, int max, int min){
+    if(target > -1) {
+      bufferForPlaybackUs = target;
+      bufferForPlaybackAfterRebufferUs = target;
+    }
+    if(min > -1){
+      minBufferUs = min;
+    }
+    if(max > -1) {
+      maxBufferUs = max;
+    }
+    return true;
+  }
+
 
   /**
    * Calculate target buffer size in bytes based on the selected tracks. The player will try not to

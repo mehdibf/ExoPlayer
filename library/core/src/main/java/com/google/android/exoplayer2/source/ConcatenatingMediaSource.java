@@ -528,7 +528,7 @@ public final class ConcatenatingMediaSource extends CompositeMediaSource<MediaSo
 
   @Override
   protected void onChildSourceInfoRefreshed(
-      MediaSourceHolder mediaSourceHolder, MediaSource mediaSource, Timeline timeline) {
+      MediaSourceHolder mediaSourceHolder, MediaSource mediaSource, Timeline timeline, @Nullable Object manifest) {
     updateMediaSourceInternal(mediaSourceHolder, timeline);
   }
 
@@ -734,7 +734,7 @@ public final class ConcatenatingMediaSource extends CompositeMediaSource<MediaSo
     timelineUpdateScheduled = false;
     Set<HandlerAndRunnable> onCompletionActions = nextTimelineUpdateOnCompletionActions;
     nextTimelineUpdateOnCompletionActions = new HashSet<>();
-    refreshSourceInfo(new ConcatenatedTimeline(mediaSourceHolders, shuffleOrder, isAtomic));
+    refreshSourceInfo(new ConcatenatedTimeline(mediaSourceHolders, shuffleOrder, isAtomic),null);
     getPlaybackThreadHandlerOnPlaybackThread()
         .obtainMessage(MSG_ON_COMPLETION, onCompletionActions)
         .sendToTarget();

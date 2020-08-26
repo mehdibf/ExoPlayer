@@ -562,7 +562,7 @@ public final class HlsMediaSource extends BaseMediaSource
               manifest,
               mediaItem);
     }
-    refreshSourceInfo(timeline);
+    refreshSourceInfo(timeline, manifest);
   }
 
 }

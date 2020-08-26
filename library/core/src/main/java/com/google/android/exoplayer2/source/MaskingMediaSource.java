@@ -146,7 +146,7 @@ public final class MaskingMediaSource extends CompositeMediaSource<Void> {
 
   @Override
   protected void onChildSourceInfoRefreshed(
-      Void id, MediaSource mediaSource, Timeline newTimeline) {
+      Void id, MediaSource mediaSource, Timeline newTimeline, @Nullable Object manifest) {
     @Nullable MediaPeriodId idForMaskingPeriodPreparation = null;
     if (isPrepared) {
       timeline = timeline.cloneWithUpdatedTimeline(newTimeline);
@@ -203,7 +203,7 @@ public final class MaskingMediaSource extends CompositeMediaSource<Void> {
     }
     hasRealTimeline = true;
     isPrepared = true;
-    refreshSourceInfo(this.timeline);
+    refreshSourceInfo(this.timeline, manifest);
     if (idForMaskingPeriodPreparation != null) {
       Assertions.checkNotNull(unpreparedMaskingMediaPeriod)
           .createPeriod(idForMaskingPeriodPreparation);

@@ -824,7 +824,7 @@ public final class SsMediaSource extends BaseMediaSource
               manifest,
               mediaItem);
     }
-    refreshSourceInfo(timeline);
+    refreshSourceInfo(timeline, manifest);
   }
 
   private void scheduleManifestRefresh() {

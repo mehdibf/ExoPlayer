@@ -134,7 +134,7 @@ public final class SilenceMediaSource extends BaseMediaSource {
             /* isDynamic= */ false,
             /* isLive= */ false,
             /* manifest= */ null,
-            mediaItem));
+            mediaItem), null);
   }
 
   @Override

@@ -58,7 +58,7 @@ public interface MediaSource {
      * @param source The {@link MediaSource} whose info has been refreshed.
      * @param timeline The source's timeline.
      */
-    void onSourceInfoRefreshed(MediaSource source, Timeline timeline);
+    void onSourceInfoRefreshed(MediaSource source, Timeline timeline, Object manifest);
   }
 
   /** Identifier for a {@link MediaPeriod}. */
@@ -292,7 +292,7 @@ public interface MediaSource {
    *
    * <p>Should not be called directly from application code.
    *
-   * <p>{@link MediaSourceCaller#onSourceInfoRefreshed(MediaSource, Timeline)} will be called once
+   * <p>{@link MediaSourceCaller#onSourceInfoRefreshed(MediaSource, Timeline, @Nullable Object manifest)} will be called once
    * the source has a {@link Timeline}.
    *
    * <p>For each call to this method, a call to {@link #releaseSource(MediaSourceCaller)} is needed

@@ -5,6 +5,10 @@ libs
 obj
 lint.xml
 
+*.orig
+*.rej
+*~
+
 # IntelliJ IDEA
 .idea
 *.iml

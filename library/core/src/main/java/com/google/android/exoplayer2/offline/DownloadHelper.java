@@ -1004,7 +1004,7 @@ public final class DownloadHelper {
     // MediaSource.MediaSourceCaller implementation.
 
     @Override
-    public void onSourceInfoRefreshed(MediaSource source, Timeline timeline) {
+    public void onSourceInfoRefreshed(MediaSource source, Timeline timeline, @Nullable Object manifest) {
       if (this.timeline != null) {
         // Ignore dynamic updates.
         return;

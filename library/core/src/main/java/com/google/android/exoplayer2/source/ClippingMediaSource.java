@@ -247,7 +247,7 @@ public final class ClippingMediaSource extends CompositeMediaSource<Void> {
   }
 
   @Override
-  protected void onChildSourceInfoRefreshed(Void id, MediaSource mediaSource, Timeline timeline) {
+  protected void onChildSourceInfoRefreshed(Void id, MediaSource mediaSource, Timeline timeline, @Nullable Object manifest) {
     if (clippingError != null) {
       return;
     }
@@ -290,7 +290,7 @@ public final class ClippingMediaSource extends CompositeMediaSource<Void> {
       clippingError = e;
       return;
     }
-    refreshSourceInfo(clippingTimeline);
+    refreshSourceInfo(clippingTimeline, null);
   }
 
   @Override

@@ -315,7 +315,7 @@ public final class SingleSampleMediaSource extends BaseMediaSource {
   @Override
   protected void prepareSourceInternal(@Nullable TransferListener mediaTransferListener) {
     transferListener = mediaTransferListener;
-    refreshSourceInfo(timeline);
+    refreshSourceInfo(timeline, null);
   }
 
   @Override
